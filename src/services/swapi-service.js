@@ -53,7 +53,7 @@ export default class SwapiService {
       gender: person.gender,
       birthYear: person.birth_year,
       eyeColor: person.eye_color
-    }
+    };
   }
 
   _transformPlanet = (planet) => {
@@ -63,7 +63,7 @@ export default class SwapiService {
       population: planet.population,
       rotationPeriod: planet.rotation_period,
       diameter: planet.diameter
-    }
+    };
   }
 
   _transformStarship = (starship) => {
@@ -77,6 +77,6 @@ export default class SwapiService {
       crew: starship.crew,
       passengers: starship.passengers,
       cargoCapacity: starship.cargo_capacity
-    }
+    };
   }
 }

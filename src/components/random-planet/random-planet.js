@@ -64,7 +64,6 @@ export default class RandomPlanet extends Component {
         {errorBox}
         {contentBox}
       </div>
-
     );
   }
 }

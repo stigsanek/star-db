@@ -14,7 +14,7 @@ export default class App extends Component {
     this.setState((state) => {
       return {
         showRandomPlanet: !state.showRandomPlanet
-      }
+      };
     });
   }
 
