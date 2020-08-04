@@ -18,14 +18,12 @@ export default class PersonDetails extends Component {
     this.updatePerson();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevState.loading) {
+  componentDidUpdate(prevProps) {
+    if (this.props.personId !== prevProps.personId) {
       this.setState({
         loading: true
       });
-    }
 
-    if (this.props.personId !== prevProps.personId) {
       this.updatePerson();
     }
   }
@@ -71,7 +69,7 @@ export default class PersonDetails extends Component {
         {errorBox}
         {contentBox}
       </React.Fragment>
-    )
+    );
   }
 }
 
