@@ -3,34 +3,34 @@ import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-import './person-details.css';
+import './item-details.css';
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: {},
+    item: {},
     loading: true,
     error: false
   }
 
   componentDidMount() {
-    this.updatePerson();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId) {
+    if (this.props.itemId !== prevProps.itemId) {
       this.setState({
         loading: true
       });
 
-      this.updatePerson();
+      this.updateItem();
     }
   }
 
-  onPersonLoaded = (person) => {
+  onItemLoaded = (item) => {
     this.setState({
-      person,
+      item,
       loading: false
     });
   }
@@ -42,26 +42,26 @@ export default class PersonDetails extends Component {
     });
   }
 
-  updatePerson() {
-    const { personId } = this.props;
+  updateItem() {
+    const { itemId } = this.props;
 
-    if (!personId) {
+    if (!itemId) {
       return
     }
 
-    this.swapiService.getPerson(personId)
-      .then(this.onPersonLoaded)
+    this.swapiService.getPerson(itemId)
+      .then(this.onItemLoaded)
       .catch(this.onError);
   }
 
   render() {
-    const { person, loading, error } = this.state;
+    const { item, loading, error } = this.state;
 
     const isData = !(loading || error);
 
     const spinnerBox = loading ? <Spinner /> : null;
     const errorBox = error ? <ErrorIndicator /> : null;
-    const contentBox = isData ? <PersonView person={person} /> : null;
+    const contentBox = isData ? <ItemView item={item} /> : null;
 
     return (
       <React.Fragment>
@@ -73,12 +73,12 @@ export default class PersonDetails extends Component {
   }
 }
 
-const PersonView = ({ person }) => {
-  const { id, name, gender, birthYear, eyeColor } = person;
+const ItemView = ({ item }) => {
+  const { id, name, gender, birthYear, eyeColor } = item;
 
   return (
-    <div className="person-details card">
-      <img className="person-image"
+    <div className="item-details card">
+      <img className="item-image"
         src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
 
       <div className="card-body">
