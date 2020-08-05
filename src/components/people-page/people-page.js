@@ -29,7 +29,11 @@ export default class PeoplePage extends Component {
     );
 
     const personDetails = (
-      <ItemDetails itemId={this.state.selectedPerson} />
+      <ItemDetails
+        itemId={this.state.selectedPerson}
+        getData={this.swapiService.getPerson}
+        getImageUrl={this.swapiService.getPersonImage}
+      />
     );
 
     return (

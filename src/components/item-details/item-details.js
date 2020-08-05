@@ -31,6 +31,7 @@ export default class ItemDetails extends Component {
   onItemLoaded = (item) => {
     this.setState({
       item,
+      image: this.props.getImageUrl(item),
       loading: false
     });
   }
@@ -43,25 +44,25 @@ export default class ItemDetails extends Component {
   }
 
   updateItem() {
-    const { itemId } = this.props;
+    const { itemId, getData } = this.props;
 
     if (!itemId) {
       return
     }
 
-    this.swapiService.getPerson(itemId)
+    getData(itemId)
       .then(this.onItemLoaded)
       .catch(this.onError);
   }
 
   render() {
-    const { item, loading, error } = this.state;
+    const { item, image, loading, error } = this.state;
 
     const isData = !(loading || error);
 
     const spinnerBox = loading ? <Spinner /> : null;
     const errorBox = error ? <ErrorIndicator /> : null;
-    const contentBox = isData ? <ItemView item={item} /> : null;
+    const contentBox = isData ? <ItemView item={item} image={image} /> : null;
 
     return (
       <React.Fragment>
@@ -73,14 +74,12 @@ export default class ItemDetails extends Component {
   }
 }
 
-const ItemView = ({ item }) => {
+const ItemView = ({ item, image }) => {
   const { id, name, gender, birthYear, eyeColor } = item;
 
   return (
     <div className="item-details card">
-      <img className="item-image"
-        src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
-
+      <img className="item-image" src={image} />
       <div className="card-body">
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
