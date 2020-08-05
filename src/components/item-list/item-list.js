@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 import './item-list.css';
 
 export default class ItemList extends Component {
-  swapiService = new SwapiService();
-
   state = {
-    peopleList: [],
+    itemList: [],
     loading: true,
     error: false
   }
 
   componentDidMount() {
-    this.swapiService.getAllPeople()
-      .then(this.onPeopleListLoaded)
+    const { getData } = this.props;
+
+    getData()
+      .then(this.onItemListLoaded)
       .catch(this.onError);
   }
 
-  onPeopleListLoaded = (peopleList) => {
+  onItemListLoaded = (itemList) => {
     this.setState({
-      peopleList,
+      itemList,
       loading: false
     });
   }
@@ -53,12 +52,12 @@ export default class ItemList extends Component {
   }
 
   render() {
-    const { peopleList, loading, error } = this.state;
+    const { itemList, loading, error } = this.state;
     const isData = !(loading || error);
 
     const spinnerBox = loading ? <Spinner /> : null;
     const errorBox = error ? <ErrorIndicator /> : null;
-    const contentBox = isData ? this.renderItems(peopleList) : null;
+    const contentBox = isData ? this.renderItems(itemList) : null;
 
     return (
       <React.Fragment>
