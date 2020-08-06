@@ -62,7 +62,15 @@ export default class ItemDetails extends Component {
 
     const spinnerBox = loading ? <Spinner /> : null;
     const errorBox = error ? <ErrorIndicator /> : null;
-    const contentBox = isData ? <ItemView item={item} image={image} /> : null;
+    let contentBox = null;
+
+    if (isData) {
+      contentBox = (
+        <ItemView item={item} image={image}>
+          {this.props.children}
+        </ItemView>
+      );
+    }
 
     return (
       <React.Fragment>
@@ -74,8 +82,8 @@ export default class ItemDetails extends Component {
   }
 }
 
-const ItemView = ({ item, image }) => {
-  const { id, name, gender, birthYear, eyeColor } = item;
+const ItemView = ({ item, image, children }) => {
+  const { name } = item;
 
   return (
     <div className="item-details card">
@@ -83,18 +91,11 @@ const ItemView = ({ item, image }) => {
       <div className="card-body">
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <span className="term">Gender:</span>
-            <span>{gender}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Birth Year:</span>
-            <span>{birthYear}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Eye Color:</span>
-            <span>{eyeColor}</span>
-          </li>
+          {
+            React.Children.map(children, (child) => {
+              return React.cloneElement(child, { item });
+            })
+          }
         </ul>
       </div>
     </div>
