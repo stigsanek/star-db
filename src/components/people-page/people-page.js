@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
 import ItemList from '../item-list';
 import ItemDetails from '../item-details';
-import ErrorBoundry from '../error-boundry';
+import ErrorBoundary from '../error-boundary';
 import Row from '../row';
 import Record from '../record';
 
@@ -42,9 +42,9 @@ export default class PeoplePage extends Component {
     );
 
     return (
-      <ErrorBoundry>
+      <ErrorBoundary>
         <Row left={itemList} right={personDetails} />
-      </ErrorBoundry>
+      </ErrorBoundary>
     );
   }
 }

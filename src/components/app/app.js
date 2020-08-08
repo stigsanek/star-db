@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
-import ErrorBoundry from '../error-boundry';
+import ErrorBoundary from '../error-boundary';
 
 export default class App extends Component {
   state = {
@@ -21,7 +21,7 @@ export default class App extends Component {
     const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
     return (
-      <ErrorBoundry>
+      <ErrorBoundary>
         <div className="container">
           <Header />
           {planet}
@@ -34,7 +34,7 @@ export default class App extends Component {
 
           <PeoplePage />
         </div>
-      </ErrorBoundry>
+      </ErrorBoundary>
     );
   }
 };
