@@ -16,9 +16,7 @@ export default class PeoplePage extends Component {
 
   render() {
     const itemList = (
-      <PersonList onPersonClick={this.onPersonSelected}>
-        {({ name }) => <span>{name}</span>}
-      </PersonList>
+      <PersonList onPersonClick={this.onPersonSelected} />
     );
 
     const personDetails = (
