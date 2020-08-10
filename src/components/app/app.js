@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import SwapiService from '../../services/swapi-service';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import PeoplePage from '../people-page';
 import ErrorBoundary from '../error-boundary';
+import { SwapiServiceProvider } from '../swapi-service-context';
 
 export default class App extends Component {
+  swapiService = new SwapiService();
+
   state = {
     showRandomPlanet: true
   }
@@ -22,18 +26,20 @@ export default class App extends Component {
 
     return (
       <ErrorBoundary>
-        <div className="container">
-          <Header />
-          {planet}
+        <SwapiServiceProvider value={this.swapiService}>
+          <div className="container">
+            <Header />
+            {planet}
 
-          <button
-            className="btn btn-warning btn-lg mb-4"
-            onClick={this.toggleRandomPlanet}>
-            Toggle Random Planet
+            <button
+              className="btn btn-warning btn-lg mb-4"
+              onClick={this.toggleRandomPlanet}>
+              Toggle Random Planet
         </button>
 
-          <PeoplePage />
-        </div>
+            <PeoplePage />
+          </div>
+        </SwapiServiceProvider>
       </ErrorBoundary>
     );
   }
