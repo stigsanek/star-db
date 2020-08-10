@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-const withData = (View, getData) => {
+const withData = (View) => {
   return class extends Component {
     state = {
       data: [],
@@ -11,7 +11,7 @@ const withData = (View, getData) => {
     }
 
     componentDidMount() {
-      getData()
+      this.props.getData()
         .then(this.onItemListLoaded)
         .catch(this.onError);
     }
