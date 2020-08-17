@@ -87,7 +87,7 @@ const ItemView = ({ item, image, children }) => {
 
   return (
     <div className="item-details card">
-      <img className="item-image" src={image} />
+      <img className="item-image" src={image} alt="Logo" />
       <div className="card-body">
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
