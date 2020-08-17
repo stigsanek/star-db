@@ -1,29 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 import ErrorBoundary from '../error-boundary';
 import Row from '../row';
 import { PersonList, PersonDetails } from '../sw-components';
 
-export default class PeoplePage extends Component {
-  state = {
-    selectedItem: 1
-  }
+const PeoplePage = ({ match, history }) => {
+  const { id } = match.params;
 
-  onItemSelected = (id) => {
-    this.setState({
-      selectedItem: id
-    });
-  }
+  return (
+    <ErrorBoundary>
+      <Row
+        left={<PersonList onItemClick={(itemId) => history.push(itemId)} />}
+        right={<PersonDetails itemId={id} />}
+      />
+    </ErrorBoundary>
+  );
+};
 
-  render() {
-    const { selectedItem } = this.state;
-
-    return (
-      <ErrorBoundary>
-        <Row
-          left={<PersonList onItemClick={this.onItemSelected} />}
-          right={<PersonDetails itemId={selectedItem} />}
-        />
-      </ErrorBoundary>
-    );
-  }
-}
+export default withRouter(PeoplePage);

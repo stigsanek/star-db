@@ -9,8 +9,8 @@ export default class ItemDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    item: {},
-    loading: true,
+    item: null,
+    loading: false,
     error: false
   }
 
@@ -57,6 +57,10 @@ export default class ItemDetails extends Component {
 
   render() {
     const { item, image, loading, error } = this.state;
+
+    if (!item) {
+      return <p>Select a item from a list</p>
+    }
 
     const isData = !(loading || error);
 
