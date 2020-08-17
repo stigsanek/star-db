@@ -20,7 +20,7 @@ export default class StarshipPage extends Component {
     return (
       <ErrorBoundary>
         <Row
-          left={<StarshipList onPersonClick={this.onItemSelected} />}
+          left={<StarshipList onItemClick={this.onItemSelected} />}
           right={<StarshipDetails itemId={selectedItem} />}
         />
       </ErrorBoundary>

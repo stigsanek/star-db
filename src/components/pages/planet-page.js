@@ -20,7 +20,7 @@ export default class PlanetPage extends Component {
     return (
       <ErrorBoundary>
         <Row
-          left={<PlanetList onPersonClick={this.onItemSelected} />}
+          left={<PlanetList onItemClick={this.onItemSelected} />}
           right={<PlanetDetails itemId={selectedItem} />}
         />
       </ErrorBoundary>
