@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ErrorBoundary from '../error-boundary';
 import Row from '../row';
-import { PlanetList, PlanetDetails } from '../sw-components';
+import { StarshipList, StarshipDetails } from '../sw-components';
 
-export default class PlanetPage extends Component {
+export default class StarshipsPage extends Component {
   state = {
-    selectedItem: 1
+    selectedItem: 2
   }
 
   onItemSelected = (id) => {
@@ -20,8 +20,8 @@ export default class PlanetPage extends Component {
     return (
       <ErrorBoundary>
         <Row
-          left={<PlanetList onItemClick={this.onItemSelected} />}
-          right={<PlanetDetails itemId={selectedItem} />}
+          left={<StarshipList onItemClick={this.onItemSelected} />}
+          right={<StarshipDetails itemId={selectedItem} />}
         />
       </ErrorBoundary>
     );
